@@ -17,19 +17,27 @@ public class Player
         //do stuff
     }
 
-    public void hit()
+    public void hit(Deck deck)
     {
-        //do stuff
+        Card newCard = deck.getTopCard();
+        this.hand.add(newCard);
     }
 
     public int getHandValue()
     {
-        //do stuff
+        int handValue;
+        for(cards : this.hand)
+        {
+            handValue += card
+        }
         return 1;
     }
 
     public void getCard(Deck deck)
     {
-        //do stuff
+        for(int i = 0; i < 2; i++)
+        {
+            this.hit(deck);
+        }
     }
 }
