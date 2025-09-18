@@ -40,4 +40,11 @@ public class Player
             this.hit(deck);
         }
     }
+
+    public String getName()
+    {
+        return this.name;
+        bridget is the greatest 
+        rael suc/8cks butt
+    }
 }
