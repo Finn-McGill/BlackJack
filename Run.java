@@ -32,21 +32,6 @@ public class Run {
         }
 
         deck.shuffle();
-
-        
-
-        // Scanner myPlayer = new Scanner(System.in);
-        // System.out.println("Enter player name:");
-        // String userName = myPlayer.nextLine();
-        // Player Me = new Player(userName);
-        
-        // System.out.println(totPlayers);
-
-        // for(int i = 0; i < numPlayers; i++)
-        // {
-
-        // }
-
         
     }
 }

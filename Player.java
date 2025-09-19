@@ -25,10 +25,33 @@ public class Player
 
     public int getHandValue()
     {
-        int handValue;
-        for(cards : this.hand)
+        int handValue = 0;
+        int numAces = 0;
+
+        for(int i = 0; i > hand.size(); i++)
         {
-            handValue += card
+            for(Card card : hand)
+            {
+                if(card.getFace(card) == "A")
+                {
+                    numAces += 1;
+                }
+            }
+        }
+        
+        System.out.println("You have" + numAces + "aces");
+
+        for(int  i = 0; i > hand.size(); i++)
+        {
+            if(hand.get(i).getFace() != "A")
+            {
+                handValue += Card.getValue(card);
+            }
+
+            for(hand.get(i).getFace() == "A")
+            {
+                
+            }
         }
         return 1;
     }
@@ -44,7 +67,5 @@ public class Player
     public String getName()
     {
         return this.name;
-        bridget is the greatest 
-        rael suc/8cks butt
     }
 }
