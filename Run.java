@@ -28,7 +28,7 @@ public class Run {
         
         for(Player p : totPlayers)
         {
-            System.out.println(p.getName());
+            System.out.println("Here are all the players" + p.getName());
         }
 
         deck.shuffle();
