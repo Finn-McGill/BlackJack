@@ -16,13 +16,13 @@ public class Card
         return this.face + " of " + this.suit + "(" + this.value + ")";
     }
 
-    public int getValue()
+    public int getValue(Card card)
     {
-        return(this.value);
+        return card.value;
     }
 
-    public String getFace()
+    public String getFace(Card card)
     {
-        return(this.face);
+        return card.face;
     }
 }

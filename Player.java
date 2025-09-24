@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player
 {
@@ -12,11 +13,40 @@ public class Player
         this.money = 100;
     }
 
-    public void playTurn()
+    public void playTurn(Deck deck)
     {
-        //do stuff
-    }
+        boolean stay = false;
+        
+        while(stay = false)
+        {
+            System.out.println(getName() + "'s hand value is" + getHandValue());
 
+            if(getHandValue() <= 21)
+            {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Would you like to hit or stay?");
+                String action = scanner.nextLine();
+
+                if(action == "hit")
+                {
+                    hit(deck);
+                    System.out.println("Your new hand value is:" + getHandValue());
+                }
+                else
+                {
+                    stay = true;
+                }
+            }
+
+            else if(getHandValue() > 21)
+            {
+                System.out.println("Your hand value is more than 21 you lose!");
+                stay = true;
+            }
+
+            break;
+        }
+    }
     public void hit(Deck deck)
     {
         Card newCard = deck.getTopCard();
@@ -33,7 +63,7 @@ public class Player
         {
             for(Card card : hand)
             {
-                if(card.getFace() == "A")
+                if(card.getFace(card) == "A")
                 {
                     numAces += 1;
                 }
@@ -42,29 +72,29 @@ public class Player
         
         System.out.println("You have" + numAces + "aces");
 
-        for(int  i = 0; i > hand.size(); i++)
+        for(Card card : hand)
         {
-            if(hand.get(i).getFace() != "A")
+            if(!card.getFace(card).equals( "A"))
             {
-                handValue += card.getValue();
+                handValue += card.getValue(card);
+                System.out.println("Without aces, your hand value is:" + handValue);
             }
 
-            System.out.println("Without aces, your hand value is:" + handValue);
-
-            while(true)
+            else if(card.getFace(card).equals("A"))
             {
-                for(hand.get(i).getFace() == "A")
+                for(int i; i <= numAces; i++)
                 {
-                    Scanner input = new Scanner(System.in);
-                    System.out.println("What total ace value(s) do you want?");
-                    int aceValue = input.nextInt();
-                    input.nextLine();
-                    
-                    if(aceValue == numAces:: aceValue == numAce *11)
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.println("For Ace # " + i + ", what total ace value do you want?");
+                    int aceValue = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if(aceValue == numAces || aceValue == numAces *11)
                     {
                         handValue += aceValue;
                         break;
                     }
+
                     else
                     {
                         System.out.println("This cannot be an ace value with the cards you have, try again");
@@ -89,28 +119,26 @@ public class Player
         return this.name;
     }
 
-    public int makeBet()
+    public void makeBet()
     {
         int playerBet = 0;
 
         while(true)
         {
-            Scanner input = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in);
             System.out.println("What is your bet");
-            int bet = input.nextInt();
-            input.nextLine();
-
+            double makeBet = scanner.nextDouble();
+            scanner.nextLine();
             
-            
-            if(bet < money)
+            if(makeBet <= money && makeBet > 0)
             {
-                System.out.println(getName() + "bets" + bet);
-                this.money -= bet
+                System.out.println(getName() + "bets" + makeBet);
+                this.money -= makeBet;
                 break;
             }
             else
             {
-                System.out.println("You bet too much you are broke take out a loan");
+                System.out.println("You bet too much/little money you are broke take out a loan");
                 System.out.println("You have: $" + money + "in your account");
             }
         }

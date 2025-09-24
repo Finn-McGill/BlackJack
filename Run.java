@@ -12,23 +12,18 @@ public class Run {
 
         ArrayList<Player> totPlayers = new ArrayList<>();
         
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("How many players do you want?");
-        int numPlayers = input.nextInt();
-        input.nextLine();
+        int numPlayers = scanner.nextInt();
+        scanner.nextLine();
 
-        for(int i = 0; i <= numPlayers; i++)
+        for(int i = 0; i < numPlayers; i++)
         {
             System.out.println("What is player" + (i + 1) + "'s name?");
-            String name = input.nextLine();
+            String name = scanner.nextLine();
 
             Player player = new Player(name);
             totPlayers.add(player);
-        }
-        
-        for(Player p : totPlayers)
-        {
-            System.out.println("Here are all the players" + p.getName());
         }
 
         deck.shuffle();
