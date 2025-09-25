@@ -42,9 +42,8 @@ public class Player
             {
                 System.out.println("Your hand value is more than 21 you lose!");
                 stay = true;
+                break;
             }
-
-            break;
         }
     }
     public void hit(Deck deck)
@@ -57,53 +56,22 @@ public class Player
     {
         int handValue = 0;
         int numAces = 0;
-        int aceValue = 0;
-
-        for(int i = 0; i > hand.size(); i++)
+        for(Card card : this.hand)
         {
-            for(Card card : hand)
+            handValue += card.getValue();
+            if(card.getFace().equals("A"))
             {
-                if(card.getFace(card) == "A")
-                {
-                    numAces += 1;
-                }
+                numAces++;
             }
         }
+
+        while(handValue > 21 && numAces > 0)
+        {
+            handValue -= 10;
+            numAces--;
+        }
+        return handValue;
         
-        System.out.println("You have" + numAces + "aces");
-
-        for(Card card : hand)
-        {
-            if(!card.getFace(card).equals( "A"))
-            {
-                handValue += card.getValue(card);
-                System.out.println("Without aces, your hand value is:" + handValue);
-            }
-
-            else if(card.getFace(card).equals("A"))
-            {
-                for(int i; i <= numAces; i++)
-                {
-                    Scanner scanner = new Scanner(System.in);
-                    System.out.println("For Ace # " + i + ", what total ace value do you want?");
-                    int aceValue = scanner.nextInt();
-                    scanner.nextLine();
-
-                    if(aceValue == numAces || aceValue == numAces *11)
-                    {
-                        handValue += aceValue;
-                        break;
-                    }
-
-                    else
-                    {
-                        System.out.println("This cannot be an ace value with the cards you have, try again");
-                    }
-                }
-            }
-
-            System.out.println("Your total hand value including aces (if any) is:" + handValue);
-        }
     }
 
     public void getCard(Deck deck)
@@ -126,13 +94,13 @@ public class Player
         while(true)
         {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("What is your bet");
+            System.out.println("What is " + getName() + "'s bet");
             double makeBet = scanner.nextDouble();
             scanner.nextLine();
             
             if(makeBet <= money && makeBet > 0)
             {
-                System.out.println(getName() + "bets" + makeBet);
+                System.out.println(getName() + " bets " + makeBet);
                 this.money -= makeBet;
                 break;
             }

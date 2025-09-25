@@ -27,6 +27,23 @@ public class Run {
         }
 
         deck.shuffle();
+
+        for(Player player : totPlayers)
+        {
+            player.makeBet();
+        }
+
+        for(Player player : totPlayers)
+        {
+            player.getCard(deck);
+            player.getHandValue();
+            System.out.println(player.getName() + " has a hand value of " + player.getHandValue());
+        }
+
+        for(Player player : totPlayers)
+        {
+            player.playTurn(deck);
+        }
         
     }
 }
