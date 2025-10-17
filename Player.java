@@ -17,24 +17,23 @@ public class Player
     {
         boolean stay = false;
         
-        while(stay = false)
+        while(!stay)
         {
-            System.out.println(getName() + "'s hand value is" + getHandValue());
-
             if(getHandValue() <= 21)
             {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Would you like to hit or stay?");
                 String action = scanner.nextLine();
 
-                if(action == "hit")
+                if(action.equals("hit"))
                 {
                     hit(deck);
-                    System.out.println("Your new hand value is:" + getHandValue());
+                    System.out.println("Your new hand value is " + getHandValue());
                 }
                 else
                 {
                     stay = true;
+                    break;
                 }
             }
 
@@ -107,8 +106,26 @@ public class Player
             else
             {
                 System.out.println("You bet too much/little money you are broke take out a loan");
-                System.out.println("You have: $" + money + "in your account");
+                System.out.println("You have: $" + money + " in your account");
             }
+        }
+    }
+
+    public String win(int dealerHand)
+    {
+        if(dealerHand > playerHand)
+        {
+            System.out.println("You lost to the dealer you lose all the money you bet");
+        }
+        else if(dealerHand < playerHand)
+        {
+            System.out.println("You beat the dealer you win! You get double your bet back!");
+            money += (playerBet)*2;
+        }
+        else
+        {
+            System.out.println("You tied the dealer. You get your money back")
+            money += playerBet;
         }
     }
 }

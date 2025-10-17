@@ -38,11 +38,15 @@ public class Run {
             player.getCard(deck);
             player.getHandValue();
             System.out.println(player.getName() + " has a hand value of " + player.getHandValue());
+            player.playTurn(deck);
         }
 
-        for(Player player : totPlayers)
+        for(Dealer)
         {
-            player.playTurn(deck);
+            player.getCard(deck);
+            player.getHandValue();
+            System.out.println(player.getName() + " has a hand value of " + player.getHandValue());
+            
         }
         
     }
