@@ -5,28 +5,35 @@ public class Dealer extends Player
         super("Robert");
     }
 
-    public boolean hard18()
+    public void action()
     {
-        int dealerHand = player.getHandValue()
+        int dealerHand = player.getHandValue();
+        boolean hard18 = false;
 
-        for(dealerHand < 21)
+        player.getCard(deck);
+
+        while(dealerHand < 18)
         {
-            player.playTurn()
+            this.hit(deck);
         }
 
-    }
+        if(dealerHand >= 18 && hand != "A")
+        {
+            System.out.println("The dealer has a hand value of: " + dealerHand);
+            hard18 = true;
+            return dealerHand;
+        }
+        else if(dealerHand >= 18 && numAces > 0)
+        {
+            dealerHand -= 10;
+            numAces--;
+            
+            return dealerHand;
 
-    public boolean soft18()
-    {
+            player.playTurn();
+        }
 
-    }
-
-    if(hard18)
-    {
-
-    }
-    else
-    {
+        
 
     }
 

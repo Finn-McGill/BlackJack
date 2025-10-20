@@ -25,6 +25,7 @@ public class Run {
             Player player = new Player(name);
             totPlayers.add(player);
         }
+        Dealer dealer = new Dealer();
 
         deck.shuffle();
 
@@ -41,13 +42,9 @@ public class Run {
             player.playTurn(deck);
         }
 
-        for(Dealer)
-        {
-            player.getCard(deck);
-            player.getHandValue();
-            System.out.println(player.getName() + " has a hand value of " + player.getHandValue());
-            
-        }
+        dealer.action();
+
+        player.win();
         
     }
 }
