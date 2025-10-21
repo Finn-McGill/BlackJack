@@ -4,13 +4,40 @@ import java.util.Scanner;
 public class Player
 {
     private String name;
-    private double money;
+    private int money;
     private ArrayList<Card> hand = new ArrayList<>();
+    private int playerBet;
+
+    public int getMoney()
+    {
+        return money;
+    }
+
+    public int getBet()
+    {
+        return playerBet;
+    }
+
+    public void setMoney(int money)
+    {
+        this.money = money;
+    }
+
+    public void setBet(int bet)
+    {
+        this.playerBet = bet;
+    }
 
     public Player(String name)
     {
         this.name = name;
         this.money = 100;
+        this.playerBet = 0;
+    }
+
+    public ArrayList<Card> getHand()
+    {
+        return hand;
     }
 
     public void playTurn(Deck deck)
@@ -45,6 +72,7 @@ public class Player
             }
         }
     }
+
     public void hit(Deck deck)
     {
         Card newCard = deck.getTopCard();
@@ -88,19 +116,18 @@ public class Player
 
     public void makeBet()
     {
-        int playerBet = 0;
-
         while(true)
         {
             Scanner scanner = new Scanner(System.in);
             System.out.println("What is " + getName() + "'s bet");
-            double makeBet = scanner.nextDouble();
+            int makeBet = scanner.nextInt();
             scanner.nextLine();
             
             if(makeBet <= money && makeBet > 0)
             {
                 System.out.println(getName() + " bets " + makeBet);
                 this.money -= makeBet;
+                this.playerBet = makeBet;
                 break;
             }
             else
@@ -108,24 +135,6 @@ public class Player
                 System.out.println("You bet too much/little money you are broke take out a loan");
                 System.out.println("You have: $" + money + " in your account");
             }
-        }
-    }
-
-    public String win(int dealerHand)
-    {
-        if(dealerHand > playerHand)
-        {
-            System.out.println("You lost to the dealer you lose all the money you bet");
-        }
-        else if(dealerHand < playerHand)
-        {
-            System.out.println("You beat the dealer you win! You get double your bet back!");
-            money += (playerBet)*2;
-        }
-        else
-        {
-            System.out.println("You tied the dealer. You get your money back")
-            money += playerBet;
         }
     }
 }

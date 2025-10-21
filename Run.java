@@ -42,9 +42,31 @@ public class Run {
             player.playTurn(deck);
         }
 
-        dealer.action();
+            dealer.getCard(deck);
+            dealer.action(deck);
 
-        player.win();
-        
+        for(Player player : totPlayers)
+        {
+            if((dealer.getHandValue() > player.getHandValue()) && (dealer.getHandValue() < 22))
+            {
+                System.out.println(player.getName() + ", you lost to the dealer you lose all the money you bet");
+                player.setMoney(player.getMoney() - player.getBet());
+            }
+            else if((dealer.getHandValue() < player.getHandValue()) && (player.getHandValue() < 22))
+            {
+                System.out.println(player.getName() + ", you beat the dealer you win! You get double your bet back!");
+                player.setMoney(player.getMoney() + player.getBet()*2);
+            }
+            else if((dealer.getHandValue() == player.getHandValue()) && (player.getHandValue() < 22))
+            {
+                System.out.println(player.getName() + ", you tied the dealer. You get your money back");
+                player.setMoney(player.getMoney() + player.getBet());
+            }
+            else
+            {
+                System.out.println(player.getName() + ", you beat the dealer you win! You get double your bet back!");
+                player.setMoney(player.getMoney() + player.getBet()*2);
+            }
+        }
     }
 }

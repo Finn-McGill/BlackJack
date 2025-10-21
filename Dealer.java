@@ -1,40 +1,62 @@
+import java.util.ArrayList;
+
 public class Dealer extends Player
 {
+    private int numAces = 0;
+    ArrayList<Card> hand = getHand();
+
     public Dealer()
     {
         super("Robert");
     }
 
-    public void action()
+    public int dealerHandValue()
     {
-        int dealerHand = player.getHandValue();
-        boolean hard18 = false;
-
-        player.getCard(deck);
-
-        while(dealerHand < 18)
+        int dealerHandValue = 0;
+        int numAces = 0;
+        for(Card card : this.hand)
         {
-            this.hit(deck);
+            dealerHandValue += card.getValue();
+            if(card.getFace().equals("A"))
+            {
+                numAces++;
+                return numAces;
+            }
+        }
+        return dealerHandValue;
+    }
+    public int action(Deck deck)
+    {
+        int dealerHand = dealerHandValue();
+        boolean hard17 = false;
+
+        while(dealerHand < 17)
+        {
+            hit(deck);
+            dealerHand = dealerHandValue();
         }
 
-        if(dealerHand >= 18 && hand != "A")
+        if(dealerHand >= 17 && numAces == 0)
         {
             System.out.println("The dealer has a hand value of: " + dealerHand);
-            hard18 = true;
+            hard17 = true;
             return dealerHand;
         }
-        else if(dealerHand >= 18 && numAces > 0)
+        
+        while(dealerHand > 21 && numAces > 0)
         {
             dealerHand -= 10;
             numAces--;
-            
-            return dealerHand;
+    
+            hit(deck);
 
-            player.playTurn();
+            while(dealerHand < 17)
+            {
+                hit(deck);
+            }
         }
 
-        
-
+        return dealerHand;
     }
 
 }
